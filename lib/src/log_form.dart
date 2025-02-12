@@ -46,6 +46,11 @@ class _LogFormState extends State<LogFormPage> {
         children: [
           Expanded(
               child: SingleChildScrollView(child: _getFormLayout(context))),
+          // _getAppButton(context, () {}, "Save"),
+          SizedBox(
+            height: 8,
+          ),
+          // _getAppButton(context, () {}, "Submit"),
         ],
       ),
     );
@@ -57,8 +62,18 @@ class _LogFormState extends State<LogFormPage> {
       child: Column(
         children: [
           _getDateBuilder(context, "date", S.current.log_date),
-          _getCategoryContainer(context, "Production", _onItemClicked, 1),
-          if (_selectedIndex == 1) _getProductionLayout(context)
+          _getCategoryContainer(
+              context, S.current.production, _onItemClicked, 1),
+          if (_selectedIndex == 1) _getProductionLayout(context),
+          _getCategoryContainer(
+              context, S.current.production, _onItemClicked, 1),
+          if (_selectedIndex == 2) _getProductionLayout(context),
+          _getCategoryContainer(
+              context, S.current.production, _onItemClicked, 1),
+          if (_selectedIndex == 2) _getProductionLayout(context),
+          SizedBox(
+            height: 8,
+          )
         ],
       ),
     );
@@ -119,6 +134,18 @@ class _LogFormState extends State<LogFormPage> {
       initialValue: DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
+    );
+  }
+
+  Widget _getIssuesLayout(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Align(
+            alignment: Alignment.center,
+            child:
+                _getHeadingLabel(context, S.current.title_shift_twelve_eight)),
+      ],
     );
   }
 
@@ -195,6 +222,26 @@ class _LogFormState extends State<LogFormPage> {
         _getTextField(context, "4_12_c_water_pH", S.current.label_ph),
         _getTextField(context, "4_12_c_water_cl2", S.current.label_cl2),
       ],
+    );
+  }
+
+  Widget _getAppButton(BuildContext context, Function onTap, String label) {
+    return SizedBox(
+      height: 40,
+      child: Material(
+        color: Colors.blueAccent,
+        child: InkWell(
+          onTap: () {
+            onTap();
+          },
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
