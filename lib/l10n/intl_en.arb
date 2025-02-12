@@ -1,0 +1,16 @@
+{
+  "_locale": "en",
+  "daily_log": "Daily log",
+  "production": "Production",
+  "log_date": "Log Date",
+  "label_dcda": "Enter DCDA",
+  "label_acid_SO2_acid": "Enter SO2/Acid",
+  "label_ph": "Enter pH",
+  "label_cl2": "Enter Cl2",
+  "title_acid": "ACID MT",
+  "title_dmwater": "DM WATER / M3",
+  "title_cooling_water": "COOLING WATER",
+  "title_shift_twelve_eight": "Shift 12/8",
+  "title_shift_four_twelve": "Shift 4/12",
+  "title_shift_eight_four": "Shift 8/4"
+}
