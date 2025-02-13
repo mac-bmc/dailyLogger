@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:daily_log/generated/l10n.dart';
-import 'package:excel/excel.dart';
+import 'package:excel/excel.dart' as excel;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -29,6 +29,10 @@ class _LogFormState extends State<LogFormPage> {
 
   void _onItemClicked(int index) {
     setState(() {
+      if (_selectedIndex != 0) {
+        _selectedIndex = 0;
+        return;
+      }
       _selectedIndex = index;
     });
   }
@@ -46,11 +50,10 @@ class _LogFormState extends State<LogFormPage> {
         children: [
           Expanded(
               child: SingleChildScrollView(child: _getFormLayout(context))),
-          // _getAppButton(context, () {}, "Save"),
           SizedBox(
             height: 8,
           ),
-          // _getAppButton(context, () {}, "Submit"),
+          _getAppButton(context, () {}, "Submit"),
         ],
       ),
     );
@@ -65,12 +68,20 @@ class _LogFormState extends State<LogFormPage> {
           _getCategoryContainer(
               context, S.current.production, _onItemClicked, 1),
           if (_selectedIndex == 1) _getProductionLayout(context),
+          _getCategoryContainer(context, S.current.title_issues, _onItemClicked, 2),
+          if (_selectedIndex == 2) _getIssuesLayout(context),
           _getCategoryContainer(
-              context, S.current.production, _onItemClicked, 1),
-          if (_selectedIndex == 2) _getProductionLayout(context),
+              context, S.current.title_plant_param_dcda, _onItemClicked, 3),
+          if (_selectedIndex == 3) _getPlantPrmAcidLayout(context),
           _getCategoryContainer(
-              context, S.current.production, _onItemClicked, 1),
-          if (_selectedIndex == 2) _getProductionLayout(context),
+              context, S.current.title_plant_parm_S02, _onItemClicked, 4),
+          if (_selectedIndex == 4) _getPlantPrmSO2Layout(context),
+          _getCategoryContainer(
+              context, S.current.title_plant_parm_S02, _onItemClicked, 5),
+          if (_selectedIndex == 4) _getPlantPrmSO2Layout(context),
+          _getCategoryContainer(
+              context, S.current.title_others, _onItemClicked, 5),
+          //if (_selectedIndex == 4) _getPlantPrmSO2Layout(context),
           SizedBox(
             height: 8,
           )
@@ -89,15 +100,28 @@ class _LogFormState extends State<LogFormPage> {
   Widget _getCategoryContainer(
       BuildContext context, String label, Function onChange, int index) {
     return Material(
+        type: MaterialType.card,
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
             onChange(index);
           },
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 8),
+            padding: EdgeInsets.all(8),
+            margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(),
+            ),
             width: double.infinity,
-            child: Text(label),
+            child: Text(
+              label,
+              style: TextStyle(
+                  fontFamily: "Roboto",
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w600,
+                  height: 1.1),
+            ),
           ),
         ));
   }
@@ -145,8 +169,165 @@ class _LogFormState extends State<LogFormPage> {
             alignment: Alignment.center,
             child:
                 _getHeadingLabel(context, S.current.title_shift_twelve_eight)),
+        SizedBox(
+          height: 8,
+        ),
+        _getTextField(context, "12/8_phosphate", S.current.label_phosphate),
+        _getTextField(context, "12/8_sulphate", S.current.label_sulphate),
+        _getTextField(context, "12/8_cd", S.current.label_cd),
+        _getTextField(context, "12/8_pd", S.current.label_pd),
+        _getTextField(context, "12/8_rap", S.current.label_RAP),
+        _getTextField(context, "12/8_pc", S.current.label_PC),
+        _getTextField(context, "12/8_sale", S.current.label_sale),
+        SizedBox(
+          height: 8,
+        ),
+        Align(
+            alignment: Alignment.center,
+            child:
+                _getHeadingLabel(context, S.current.title_shift_twelve_eight)),
+        SizedBox(
+          height: 8,
+        ),
+        _getTextField(context, "8/4_phosphate", S.current.label_phosphate),
+        _getTextField(context, "8/4_sulphate", S.current.label_sulphate),
+        _getTextField(context, "8/4_cd", S.current.label_cd),
+        _getTextField(context, "8/4_pd", S.current.label_pd),
+        _getTextField(context, "8/4_rap", S.current.label_RAP),
+        _getTextField(context, "8/4_pc", S.current.label_PC),
+        _getTextField(context, "8/4_sale", S.current.label_sale),
+        SizedBox(
+          height: 8,
+        ),
+        Align(
+            alignment: Alignment.center,
+            child:
+                _getHeadingLabel(context, S.current.title_shift_twelve_eight)),
+        SizedBox(
+          height: 8,
+        ),
+        _getTextField(context, "4/12_phosphate", S.current.label_phosphate),
+        _getTextField(context, "4/12_sulphate", S.current.label_sulphate),
+        _getTextField(context, "4/12_cd", S.current.label_cd),
+        _getTextField(context, "4/12_pd", S.current.label_pd),
+        _getTextField(context, "4/12_rap", S.current.label_RAP),
+        _getTextField(context, "4/12_pc", S.current.label_PC),
+        _getTextField(context, "4/12_sale", S.current.label_sale)
       ],
     );
+  }
+
+  Widget _getPlantPrmSO2Layout(BuildContext context) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Align(
+          alignment: Alignment.center,
+          child: _getHeadingLabel(context, S.current.title_shift_twelve_eight)),
+      SizedBox(
+        height: 8,
+      ),
+      _getTextField(context, "12_8_so2_plant_sulpher", S.current.label_sulpher),
+      _getTextField(
+          context, "12_8_so2_plant_inl_SO2", S.current.label_inletSO2),
+      _getTextField(context, "12_8_so2_plant_stack", S.current.label_stack),
+      Align(
+          alignment: Alignment.center,
+          child: _getHeadingLabel(context, S.current.title_shift_eight_four)),
+      SizedBox(
+        height: 8,
+      ),
+      _getTextField(context, "8_4_so2_plant_sulpher", S.current.label_sulpher),
+      _getTextField(context, "8_4_so2_plant_inl_SO2", S.current.label_inletSO2),
+      _getTextField(context, "8_4_so2_plant_stack", S.current.label_stack),
+      Align(
+          alignment: Alignment.center,
+          child: _getHeadingLabel(context, S.current.title_shift_four_twelve)),
+      SizedBox(
+        height: 8,
+      ),
+      _getTextField(context, "4_12_so2_plant_sulpher", S.current.label_sulpher),
+      _getTextField(
+          context, "4_12_so2_plant_inl_SO2", S.current.label_inletSO2),
+      _getTextField(context, "4_12_so2_plant_stack", S.current.label_stack),
+      SizedBox(
+        height: 12,
+      ),
+      _getTextField(context, "so2_plant_sulpher", S.current.label_dp_conv),
+      _getTextField(context, "so2_plant_inl_SO2", S.current.label_iat_temp),
+      _getTextField(context, "so2_plant_stack", S.current.label_pdt_temp),
+      SizedBox(
+        height: 8,
+      ),
+      _getLabel(context, S.current.label_furnace_temp),
+      _getTextField(context, "so2_plant_ft_1", "1"),
+      _getTextField(context, "so2_plant_ft_2", "2"),
+      _getTextField(context, "so2_plant_ft_3", "3"),
+      SizedBox(
+        height: 8,
+      ),
+      _getLabel(context, S.current.label_converter_bed_temperature),
+      _getTextField(context, "so2_plant_ct_1", "1"),
+      _getTextField(context, "so2_plant_ct_2", "2"),
+      _getTextField(context, "so2_plant_ct_3", "3"),
+      _getTextField(context, "so2_plant_ct_4", "4"),
+    ]);
+  }
+
+  Widget _getPlantPrmAcidLayout(BuildContext context) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Align(
+          alignment: Alignment.center,
+          child: _getHeadingLabel(context, S.current.title_shift_twelve_eight)),
+      SizedBox(
+        height: 8,
+      ),
+      _getTextField(
+          context, "12_8_acid_plant_sulpher", S.current.label_sulpher),
+      _getTextField(
+          context, "12_8_acid_plant_inl_SO2", S.current.label_inletSO2),
+      _getTextField(context, "12_8_acid_plant_stack", S.current.label_stack),
+      Align(
+          alignment: Alignment.center,
+          child: _getHeadingLabel(context, S.current.title_shift_eight_four)),
+      SizedBox(
+        height: 8,
+      ),
+      _getTextField(context, "8_4_acid_plant_sulpher", S.current.label_sulpher),
+      _getTextField(
+          context, "8_4_acid_plant_inl_SO2", S.current.label_inletSO2),
+      _getTextField(context, "8_4_acid_plant_stack", S.current.label_stack),
+      Align(
+          alignment: Alignment.center,
+          child: _getHeadingLabel(context, S.current.title_shift_four_twelve)),
+      SizedBox(
+        height: 8,
+      ),
+      _getTextField(
+          context, "4_12_acid_plant_sulpher", S.current.label_sulpher),
+      _getTextField(
+          context, "4_12_acid_plant_inl_SO2", S.current.label_inletSO2),
+      _getTextField(context, "4_12_acid_plant_stack", S.current.label_stack),
+      SizedBox(
+        height: 12,
+      ),
+      _getTextField(context, "acid_plant_sulpher", S.current.label_dp_conv),
+      _getTextField(context, "acid_plant_inl_SO2", S.current.label_iat_temp),
+      _getTextField(context, "acid_plant_stack", S.current.label_pdt_temp),
+      SizedBox(
+        height: 8,
+      ),
+      _getLabel(context, S.current.label_furnace_temp),
+      _getTextField(context, "acid_plant_ft_1", "1"),
+      _getTextField(context, "acid_plant_ft_2", "2"),
+      _getTextField(context, "acid_plant_ft_3", "3"),
+      SizedBox(
+        height: 8,
+      ),
+      _getLabel(context, S.current.label_converter_bed_temperature),
+      _getTextField(context, "acid_plant_ct_1", "1"),
+      _getTextField(context, "acid_plant_ct_2", "2"),
+      _getTextField(context, "acid_plant_ct_3", "3"),
+      _getTextField(context, "acid_plant_ct_4", "4"),
+    ]);
   }
 
   Widget _getProductionLayout(BuildContext context) {
@@ -230,6 +411,10 @@ class _LogFormState extends State<LogFormPage> {
       height: 40,
       child: Material(
         color: Colors.blueAccent,
+        shape: RoundedRectangleBorder(
+          side: BorderSide.none,
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: InkWell(
           onTap: () {
             onTap();
@@ -250,7 +435,7 @@ class _LogFormState extends State<LogFormPage> {
       ByteData data = await rootBundle.load('assets/template.xlsx');
       List<int> bytes = data.buffer.asUint8List();
 
-      var excelFile = Excel.decodeBytes(bytes);
+      var excelFile = excel.Excel.decodeBytes(bytes);
       var sheet = excelFile['Sheet1'];
 
       // Fill in the data (adjust cell indexes as needed)

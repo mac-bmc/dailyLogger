@@ -24,17 +24,43 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "_locale": MessageLookupByLibrary.simpleMessage("en"),
         "daily_log": MessageLookupByLibrary.simpleMessage("Daily log"),
+        "label_PC": MessageLookupByLibrary.simpleMessage("PC"),
+        "label_RAP": MessageLookupByLibrary.simpleMessage("RAP"),
         "label_acid_SO2_acid":
             MessageLookupByLibrary.simpleMessage("Enter SO2/Acid"),
+        "label_cd": MessageLookupByLibrary.simpleMessage("CD"),
         "label_cl2": MessageLookupByLibrary.simpleMessage("Enter Cl2"),
+        "label_converter_bed_temperature":
+            MessageLookupByLibrary.simpleMessage("Converter Bed Temperature"),
         "label_dcda": MessageLookupByLibrary.simpleMessage("Enter DCDA"),
+        "label_dp_conv":
+            MessageLookupByLibrary.simpleMessage("DP CONV in cmwc"),
+        "label_furnace_temp":
+            MessageLookupByLibrary.simpleMessage("Furnace Temperature"),
+        "label_iat_temp":
+            MessageLookupByLibrary.simpleMessage("IAT PHE IN TEMP (in C)"),
+        "label_inletSO2": MessageLookupByLibrary.simpleMessage("Inlet SO2 %"),
+        "label_pd": MessageLookupByLibrary.simpleMessage("PD"),
+        "label_pdt_temp":
+            MessageLookupByLibrary.simpleMessage("PDT OUT TEMP (in C)"),
         "label_ph": MessageLookupByLibrary.simpleMessage("Enter pH"),
+        "label_phosphate": MessageLookupByLibrary.simpleMessage("Phosphate"),
+        "label_sale": MessageLookupByLibrary.simpleMessage("SALE"),
+        "label_stack": MessageLookupByLibrary.simpleMessage("Stack"),
+        "label_sulphate": MessageLookupByLibrary.simpleMessage("Sulphate"),
+        "label_sulpher": MessageLookupByLibrary.simpleMessage("Sulpher"),
         "log_date": MessageLookupByLibrary.simpleMessage("Log Date"),
-        "production": MessageLookupByLibrary.simpleMessage("Production"),
+        "production": MessageLookupByLibrary.simpleMessage("PRODUCTION"),
         "title_acid": MessageLookupByLibrary.simpleMessage("ACID MT"),
         "title_cooling_water":
             MessageLookupByLibrary.simpleMessage("COOLING WATER"),
         "title_dmwater": MessageLookupByLibrary.simpleMessage("DM WATER / M3"),
+        "title_issues": MessageLookupByLibrary.simpleMessage("Issues"),
+        "title_others": MessageLookupByLibrary.simpleMessage("Others"),
+        "title_plant_param_dcda":
+            MessageLookupByLibrary.simpleMessage("PLANT PARAMETERS - DCDA"),
+        "title_plant_parm_S02":
+            MessageLookupByLibrary.simpleMessage("PLANT PARAMETERS - SO2/ACID"),
         "title_shift_eight_four":
             MessageLookupByLibrary.simpleMessage("Shift 8/4"),
         "title_shift_four_twelve":

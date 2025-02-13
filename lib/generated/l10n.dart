@@ -70,11 +70,31 @@ class S {
     );
   }
 
-  /// `Production`
+  /// `PRODUCTION`
   String get production {
     return Intl.message(
-      'Production',
+      'PRODUCTION',
       name: 'production',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Issues`
+  String get title_issues {
+    return Intl.message(
+      'Issues',
+      name: 'title_issues',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Others`
+  String get title_others {
+    return Intl.message(
+      'Others',
+      name: 'title_others',
       desc: '',
       args: [],
     );
@@ -185,6 +205,176 @@ class S {
     return Intl.message(
       'Shift 8/4',
       name: 'title_shift_eight_four',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phosphate`
+  String get label_phosphate {
+    return Intl.message(
+      'Phosphate',
+      name: 'label_phosphate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sulphate`
+  String get label_sulphate {
+    return Intl.message(
+      'Sulphate',
+      name: 'label_sulphate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CD`
+  String get label_cd {
+    return Intl.message(
+      'CD',
+      name: 'label_cd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PD`
+  String get label_pd {
+    return Intl.message(
+      'PD',
+      name: 'label_pd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SALE`
+  String get label_sale {
+    return Intl.message(
+      'SALE',
+      name: 'label_sale',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RAP`
+  String get label_RAP {
+    return Intl.message(
+      'RAP',
+      name: 'label_RAP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PC`
+  String get label_PC {
+    return Intl.message(
+      'PC',
+      name: 'label_PC',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PLANT PARAMETERS - SO2/ACID`
+  String get title_plant_parm_S02 {
+    return Intl.message(
+      'PLANT PARAMETERS - SO2/ACID',
+      name: 'title_plant_parm_S02',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PLANT PARAMETERS - DCDA`
+  String get title_plant_param_dcda {
+    return Intl.message(
+      'PLANT PARAMETERS - DCDA',
+      name: 'title_plant_param_dcda',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sulpher`
+  String get label_sulpher {
+    return Intl.message(
+      'Sulpher',
+      name: 'label_sulpher',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stack`
+  String get label_stack {
+    return Intl.message(
+      'Stack',
+      name: 'label_stack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inlet SO2 %`
+  String get label_inletSO2 {
+    return Intl.message(
+      'Inlet SO2 %',
+      name: 'label_inletSO2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DP CONV in cmwc`
+  String get label_dp_conv {
+    return Intl.message(
+      'DP CONV in cmwc',
+      name: 'label_dp_conv',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `IAT PHE IN TEMP (in C)`
+  String get label_iat_temp {
+    return Intl.message(
+      'IAT PHE IN TEMP (in C)',
+      name: 'label_iat_temp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PDT OUT TEMP (in C)`
+  String get label_pdt_temp {
+    return Intl.message(
+      'PDT OUT TEMP (in C)',
+      name: 'label_pdt_temp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Furnace Temperature`
+  String get label_furnace_temp {
+    return Intl.message(
+      'Furnace Temperature',
+      name: 'label_furnace_temp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Converter Bed Temperature`
+  String get label_converter_bed_temperature {
+    return Intl.message(
+      'Converter Bed Temperature',
+      name: 'label_converter_bed_temperature',
       desc: '',
       args: [],
     );
