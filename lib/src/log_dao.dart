@@ -10,7 +10,7 @@ class LogDao {
     await box.clear();
   }
 
-  Future<void> saveData(List<Map<String, String>> dataMap) async {
+  Future<void> saveData(List<Map<String, dynamic>> dataMap) async {
     final box = await getBox();
     for (final data in dataMap) {
       await box.put(data.keys, data.values);
@@ -22,5 +22,10 @@ class LogDao {
     final result = box.get(key);
     if (result == null) return null;
     return result;
+  }
+
+  Future<List<Map<String, dynamic>>> getAllData() async {
+    var box = await getBox();
+    return box.values.map((value) => value as Map<String, dynamic>).toList();
   }
 }

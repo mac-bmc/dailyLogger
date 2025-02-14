@@ -1,12 +1,11 @@
-import 'dart:io';
-
 import 'package:daily_log/generated/l10n.dart';
-import 'package:excel/excel.dart' as excel;
+import 'package:daily_log/src/application/log_form_bloc.dart';
+import 'package:daily_log/src/application/log_form_event.dart';
+import 'package:daily_log/src/application/log_form_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
 
 class LogFormPage extends StatefulWidget {
   const LogFormPage({super.key});
@@ -18,6 +17,13 @@ class LogFormPage extends StatefulWidget {
 class _LogFormState extends State<LogFormPage> {
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
   int _selectedIndex = 0;
+  LogFormBloc? _bloc;
+
+  @override
+  void didChangeDependencies() {
+    _bloc ??= BlocProvider.of<LogFormBloc>(context);
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +35,11 @@ class _LogFormState extends State<LogFormPage> {
 
   void _onItemClicked(int index) {
     setState(() {
-      if (_selectedIndex != 0) {
+      if (_selectedIndex == index) {
         _selectedIndex = 0;
-        return;
+      } else {
+        _selectedIndex = index;
       }
-      _selectedIndex = index;
     });
   }
 
@@ -44,19 +50,23 @@ class _LogFormState extends State<LogFormPage> {
   }
 
   Widget _getBodyLayout(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-      child: Column(
-        children: [
-          Expanded(
-              child: SingleChildScrollView(child: _getFormLayout(context))),
-          SizedBox(
-            height: 8,
-          ),
-          _getAppButton(context, () {}, "Submit"),
-        ],
-      ),
-    );
+    return BlocBuilder<LogFormBloc, LogFormState>(builder: (context, state) {
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        child: Column(
+          children: [
+            Expanded(
+                child: SingleChildScrollView(child: _getFormLayout(context))),
+            SizedBox(
+              height: 8,
+            ),
+            _getAppButton(context, () {
+              _saveAndValidateForm();
+            }, "Submit"),
+          ],
+        ),
+      );
+    });
   }
 
   Widget _getFormLayout(BuildContext context) {
@@ -68,7 +78,8 @@ class _LogFormState extends State<LogFormPage> {
           _getCategoryContainer(
               context, S.current.production, _onItemClicked, 1),
           if (_selectedIndex == 1) _getProductionLayout(context),
-          _getCategoryContainer(context, S.current.title_issues, _onItemClicked, 2),
+          _getCategoryContainer(
+              context, S.current.title_issues, _onItemClicked, 2),
           if (_selectedIndex == 2) _getIssuesLayout(context),
           _getCategoryContainer(
               context, S.current.title_plant_param_dcda, _onItemClicked, 3),
@@ -78,10 +89,13 @@ class _LogFormState extends State<LogFormPage> {
           if (_selectedIndex == 4) _getPlantPrmSO2Layout(context),
           _getCategoryContainer(
               context, S.current.title_plant_parm_S02, _onItemClicked, 5),
-          if (_selectedIndex == 4) _getPlantPrmSO2Layout(context),
+          if (_selectedIndex == 5) _getPlantPrmSO2Layout(context),
           _getCategoryContainer(
-              context, S.current.title_others, _onItemClicked, 5),
-          //if (_selectedIndex == 4) _getPlantPrmSO2Layout(context),
+              context, S.current.title_others, _onItemClicked, 6),
+          if (_selectedIndex == 6) _getOthersLayout(context),
+          _getCategoryContainer(
+              context, S.current.label_shutdown_details, _onItemClicked, 7),
+          if (_selectedIndex == 7) _getShutDownLayout(context),
           SizedBox(
             height: 8,
           )
@@ -95,6 +109,12 @@ class _LogFormState extends State<LogFormPage> {
       name: key,
       decoration: InputDecoration(labelText: label),
     );
+  }
+
+  Widget _getSaveBtn(BuildContext context) {
+    return _getAppButton(context, () {
+      _saveAndValidateForm();
+    }, "Save");
   }
 
   Widget _getCategoryContainer(
@@ -272,6 +292,104 @@ class _LogFormState extends State<LogFormPage> {
     ]);
   }
 
+  Widget _getOthersLayout(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Align(
+            alignment: Alignment.center,
+            child: _getLabel(context, S.current.label_sulpher_analysis)),
+        SizedBox(
+          height: 8,
+        ),
+        _getTextField(context, "sa_ash", S.current.label_ash),
+        _getTextField(context, "sa_acidity_c", S.current.label_acidity_c),
+        _getTextField(context, "sa_acidity_d", S.current.label_acidity_d),
+        SizedBox(
+          height: 16,
+        ),
+        Align(
+            alignment: Alignment.center,
+            child: _getLabel(context, S.current.label_oleum_analysis)),
+        SizedBox(
+          height: 8,
+        ),
+        _getTextField(context, "oa_fs03", S.current.label_fso3),
+        _getTextField(context, "oa_ts03", S.current.label_tso3),
+        _getTextField(context, "oa_fe", S.current.label_fe),
+        SizedBox(
+          height: 16,
+        ),
+        Align(
+            alignment: Alignment.center,
+            child: _getLabel(context, S.current.label_power_consumed)),
+        SizedBox(
+          height: 8,
+        ),
+        _getTextField(context, "po_dcda", S.current.label_dcda),
+        _getTextField(context, "po_so2", S.current.label_acid_SO2_acid),
+        SizedBox(
+          height: 16,
+        ),
+        Align(
+            alignment: Alignment.center,
+            child: _getLabel(context, S.current.label_ire_supply)),
+        _getTextField(context, "ire_init", S.current.label_initial),
+        _getTextField(context, "ire_final", S.current.label_initial),
+        Align(
+            alignment: Alignment.center,
+            child: _getLabel(context, S.current.label_steam_tot_cc)),
+        _getTextField(context, "steam_tot_cc_init", S.current.label_initial),
+        _getTextField(context, "steam_tot_cc_final", S.current.label_initial),
+        Align(
+            alignment: Alignment.center,
+            child: _getLabel(context, S.current.label_CT_water)),
+        _getTextField(context, "ct_water_init", S.current.label_initial),
+        _getTextField(context, "ct_water_final", S.current.label_initial),
+        Align(
+            alignment: Alignment.center,
+            child: _getLabel(context, S.current.label_sulpher_flow)),
+        _getTextField(context, "sulpher_flow_dcda", S.current.label_dcda),
+        _getTextField(
+            context, "sulpher_flow_so2", S.current.label_acid_SO2_acid),
+      ],
+    );
+  }
+
+  Widget _getShutDownLayout(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _getTextField(context, "shutdown_from", S.current.label_from),
+        _getTextField(context, "shutdown_to", S.current.label_to),
+        _getTextField(context, "shutdown_duration", S.current.label_duration),
+        SizedBox(
+          height: 16,
+        ),
+        _getLabel(context, S.current.label_cs_pit),
+        SizedBox(
+          height: 8,
+        ),
+        _getTextField(context, "cpit_dcda", S.current.label_dcda),
+        _getTextField(context, "cpit_so2", S.current.label_acid_SO2_acid),
+        SizedBox(
+          height: 16,
+        ),
+        _getLabel(context, S.current.label_caustic_storage),
+        SizedBox(
+          height: 8,
+        ),
+        _getTextField(context, "caus_dcda", S.current.label_dcda),
+        _getTextField(context, "caus_so2", S.current.label_acid_SO2_acid),
+        SizedBox(
+          height: 8,
+        ),
+        _getTextField(
+            context, "shift_in_charge", S.current.label_shift_in_charge),
+      ],
+    );
+  }
+
   Widget _getPlantPrmAcidLayout(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Align(
@@ -430,32 +548,14 @@ class _LogFormState extends State<LogFormPage> {
     );
   }
 
-  Future<void> fillTemplate() async {
-    try {
-      ByteData data = await rootBundle.load('assets/template.xlsx');
-      List<int> bytes = data.buffer.asUint8List();
-
-      var excelFile = excel.Excel.decodeBytes(bytes);
-      var sheet = excelFile['Sheet1'];
-
-      // Fill in the data (adjust cell indexes as needed)
-      /*sheet!.cell(CellIndex.indexByString("B2")).value = nameController.text; // Example: cell B2
-      sheet.cell(CellIndex.indexByString("B3")).value = ageController.text;   // Example: cell B3*/
-
-      var savedBytes = excelFile.save();
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/FilledTemplate.xlsx')
-        ..createSync(recursive: true)
-        ..writeAsBytesSync(savedBytes!);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Excel file saved at: ${file.path}')),
-      );
-    } catch (e) {
-      print('Error: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to generate Excel file')),
-      );
+  void _saveAndValidateForm() {
+    if (_formKey.currentState!.saveAndValidate()) {
+      print(_formKey.currentState!.value.entries.toList());
+      final mapEntries = _formKey.currentState!.value.entries.toList();
+      List<Map<String, dynamic>> listOfMaps = mapEntries.map((entry) {
+        return {entry.key: entry.value};
+      }).toList();
+      _bloc?.add(LogSavedEvent(dataMap: listOfMaps));
     }
   }
 }

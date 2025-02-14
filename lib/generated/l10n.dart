@@ -80,10 +80,10 @@ class S {
     );
   }
 
-  /// `Issues`
+  /// `ISSUES`
   String get title_issues {
     return Intl.message(
-      'Issues',
+      'ISSUES',
       name: 'title_issues',
       desc: '',
       args: [],
@@ -375,6 +375,266 @@ class S {
     return Intl.message(
       'Converter Bed Temperature',
       name: 'label_converter_bed_temperature',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sulpher Analysis (ppm)`
+  String get label_sulpher_analysis {
+    return Intl.message(
+      'Sulpher Analysis (ppm)',
+      name: 'label_sulpher_analysis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oleum Analysis`
+  String get label_oleum_analysis {
+    return Intl.message(
+      'Oleum Analysis',
+      name: 'label_oleum_analysis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stock MT,`
+  String get label_stock_mt {
+    return Intl.message(
+      'Stock MT,',
+      name: 'label_stock_mt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Power Consumed`
+  String get label_power_consumed {
+    return Intl.message(
+      'Power Consumed',
+      name: 'label_power_consumed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ASH`
+  String get label_ash {
+    return Intl.message(
+      'ASH',
+      name: 'label_ash',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ACIDITY D`
+  String get label_acidity_d {
+    return Intl.message(
+      'ACIDITY D',
+      name: 'label_acidity_d',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ACIDITY_C`
+  String get label_acidity_c {
+    return Intl.message(
+      'ACIDITY_C',
+      name: 'label_acidity_c',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TSO3`
+  String get label_tso3 {
+    return Intl.message(
+      'TSO3',
+      name: 'label_tso3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FSO3`
+  String get label_fso3 {
+    return Intl.message(
+      'FSO3',
+      name: 'label_fso3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fe`
+  String get label_fe {
+    return Intl.message(
+      'Fe',
+      name: 'label_fe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acid`
+  String get label_acid {
+    return Intl.message(
+      'Acid',
+      name: 'label_acid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oleum`
+  String get label_oleum {
+    return Intl.message(
+      'Oleum',
+      name: 'label_oleum',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shutdown Details`
+  String get label_shutdown_details {
+    return Intl.message(
+      'Shutdown Details',
+      name: 'label_shutdown_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From`
+  String get label_from {
+    return Intl.message(
+      'From',
+      name: 'label_from',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To`
+  String get label_to {
+    return Intl.message(
+      'To',
+      name: 'label_to',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duration`
+  String get label_duration {
+    return Intl.message(
+      'Duration',
+      name: 'label_duration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reason for shutdown`
+  String get label_reason {
+    return Intl.message(
+      'Reason for shutdown',
+      name: 'label_reason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shift Incharge`
+  String get label_shift_in_charge {
+    return Intl.message(
+      'Shift Incharge',
+      name: 'label_shift_in_charge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CS PIT level (cm)`
+  String get label_cs_pit {
+    return Intl.message(
+      'CS PIT level (cm)',
+      name: 'label_cs_pit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Caustic storage level (cm)`
+  String get label_caustic_storage {
+    return Intl.message(
+      'Caustic storage level (cm)',
+      name: 'label_caustic_storage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Initial`
+  String get label_initial {
+    return Intl.message(
+      'Initial',
+      name: 'label_initial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Final`
+  String get label_final {
+    return Intl.message(
+      'Final',
+      name: 'label_final',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `IRE Water Supply`
+  String get label_ire_supply {
+    return Intl.message(
+      'IRE Water Supply',
+      name: 'label_ire_supply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Steam TOTCC`
+  String get label_steam_tot_cc {
+    return Intl.message(
+      'Steam TOTCC',
+      name: 'label_steam_tot_cc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CT Makeup water`
+  String get label_CT_water {
+    return Intl.message(
+      'CT Makeup water',
+      name: 'label_CT_water',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sulpher Flow IR`
+  String get label_sulpher_flow {
+    return Intl.message(
+      'Sulpher Flow IR',
+      name: 'label_sulpher_flow',
       desc: '',
       args: [],
     );

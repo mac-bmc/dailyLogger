@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:daily_log/generated/l10n.dart';
+import 'package:daily_log/src/application/log_form_bloc.dart';
 import 'package:daily_log/src/log_form.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -44,7 +46,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LogFormPage(),
+      home: BlocProvider(
+          create: (_) => LogFormBloc(), child: const LogFormPage()),
     );
   }
 }
